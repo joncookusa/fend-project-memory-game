@@ -92,7 +92,6 @@ h1 {
 }
 
 .score-panel .stars {
-    margin: 0;
     padding: 0;
     display: inline-block;
     margin: 0 5px 0 0;
@@ -105,5 +104,41 @@ h1 {
 
 .score-panel .restart {
     float: right;
+    cursor: pointer;
+}
+
+.column {
+    float: left;
+    width: 25%;
+    text-align: center;
+}
+
+.congratulations-page {
+    width: 660px;
+    min-height: 680px;
+    background: white;
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 3em;
+    text-align: center;
+}
+
+#result {
+    color: gray;
+    margin-bottom: 10px;
+}
+
+#congratulations-page button {
+    background: #02ccba;
+    min-height: 32px;
+    font-size: 1.5em;
+    border-radius: 5px;
+    padding: 5px 15px 5px 15px;
+    color: white;
     cursor: pointer;
 }

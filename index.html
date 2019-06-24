@@ -16,21 +16,33 @@
         </header>
 
         <section class="score-panel">
-        	<ul class="stars">
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        	</ul>
+            <div class="column">
+                <ul class="stars" id="stars">
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                </ul>
+            </div>
 
-        	<span class="moves" id="moves">0</span> Moves
+            <div class="column">
+        	    <span class="moves" id="moves">0</span> Moves
+            </div>
 
-            <div class="restart" id="restart">
+            <div class="column" id="time-taken">Time : 0</div>
+
+            <div class="column restart" id="restart">
         		<i class="fa fa-repeat"></i>
         	</div>
         </section>
 
         <ul class="deck" id="deck">
         </ul>
+
+        <div id="congratulations-page" class="congratulations-page">
+            <h2>Congratulations! You won!</h2>
+            <div id="result"></div>
+            <button id="play-again">Play again</button>
+        </div>
     </div>
 
     <script src="js/app.js"></script>

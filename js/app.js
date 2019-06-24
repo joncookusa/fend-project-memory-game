@@ -23,6 +23,10 @@ let cards = [
 
 let openCards = [];
 let moveCounter = 0;
+let timeTaken = 0;
+let intervalTimer = null;
+let matchedCardCount = 0;
+let starCount = 3;
 
 /*
  * Display the cards on the page
@@ -47,11 +51,20 @@ function shuffle(array) {
 }
 
 function generateCardHTML() {
+    let index = 0;
     return cards.map((card) => {
-        return `<li class="card" data-name="${card}">
+        let html = `<li class="card" data-name="${card}" data-id="${index}">
               <i class="fa ${card}"></i>
         </li>`;
+        index++;
+        return html;
     });
+}
+
+function resetStarHTML() {
+    return `<li><i class="fa fa-star"></i></li>
+            <li><i class="fa fa-star"></i></li>
+            <li><i class="fa fa-star"></i></li>`;
 }
 
 function showCard(card) {
@@ -63,6 +76,7 @@ function lockMatchedCards() {
         openCards[0].classList.add("match");
         openCards[1].classList.add("match");
         openCards.length = 0;
+        matchedCardCount ++;
     }
 }
 
@@ -81,26 +95,82 @@ function incrementMoveCounter() {
     document.getElementById("moves").innerText = moveCounter;
 }
 
-function addCardToOpenList(card) {
-    openCards.push(card);
-
-    // Do the cards match
-    if (openCards.length === 2) {
-        if (openCards[0].dataset.name === openCards[1].dataset.name) {
-            // Yes they do.
-            lockMatchedCards();
-        } else {
-            // No they don't
-            resetUnmatchedCards();
-        }
-        incrementMoveCounter();
+function updateStarCounter() {
+    switch (true) {
+        case (moveCounter < 16) : starCount = 3; break;
+        case (moveCounter > 15 && moveCounter < 26) : starCount = 2; break;
+        case (moveCounter > 25 && moveCounter < 36) : starCount = 1; break;
+        default : starCount = 0;
     }
+    let starElement = document.getElementById("stars");
+    if (starElement.children.length > 0) {
+        switch (true) {
+            case (starCount === 2 && starElement.children.length === 3) :
+                starElement.children[0].remove();
+                break;
+            case (starCount === 1 && starElement.children.length === 2) :
+                starElement.children[0].remove();
+                break;
+            case (starCount === 0 && starElement.children.length === 1) :
+                starElement.children[0].remove();
+                break;
+            default :
+        }
+    }
+
+}
+
+function addCardToOpenList(card) {
+
+    // Ignore the card if it is already in the list of cards. i.e. ignore the card if the user clicks the same one twice
+    if (openCards.length !== 1 || openCards[0].dataset.id !== card.dataset.id) {
+        openCards.push(card);
+
+        // Do the cards match
+        if (openCards.length === 2) {
+            if (openCards[0].dataset.name === openCards[1].dataset.name) {
+                // Yes they do.
+                lockMatchedCards();
+            } else {
+                // No they don't
+                resetUnmatchedCards();
+            }
+            incrementMoveCounter();
+            updateStarCounter();
+        }
+    }
+}
+
+function showCongratulationsPage() {
+    document.getElementById("deck").style.display = "none";
+    document.getElementById("congratulations-page").style.display = "block";
+    const description = starCount !== 1 ? 'stars' : 'star';
+    document.getElementById("result").innerHTML = `With ${moveCounter} moves and ${starCount} ${description} in ${timeTaken} seconds<div>Woooooooo!!!</div>`;
+}
+
+function showCardDeckPage() {
+    document.getElementById("deck").style.display = "flex";
+    document.getElementById("congratulations-page").style.display = "none";
 }
 
 function start() {
 
+    showCardDeckPage();
     openCards.length = 0;
     moveCounter = -1;
+    timeTaken = 0;
+    matchedCardCount = 0;
+    starCount = 3;
+    document.getElementById("time-taken").innerText = `Time : ${timeTaken}`;
+
+    document.getElementById("stars").innerHTML = resetStarHTML();
+
+    clearInterval(intervalTimer);
+
+    intervalTimer = setInterval(() => {
+        timeTaken += 1;
+        document.getElementById("time-taken").innerText = `Time : ${timeTaken}`;
+    }, 1000);
     incrementMoveCounter();
 
     // Shuffle the card array
@@ -117,6 +187,8 @@ function start() {
 
 function init() {
 
+    document.getElementById("congratulations-page").style.display = "none";
+
     // Set the click event listener on the deck
     document.getElementById("deck").addEventListener("click", (e) => {
         if (e.target.classList.contains("card") && openCards.length < 2) {
@@ -124,13 +196,22 @@ function init() {
             let card = e.target;
             showCard(card);
             addCardToOpenList(card);
+            if (matchedCardCount === 8) {
+                // Game won
+                setTimeout(() => {
+                    clearInterval(intervalTimer);
+                    showCongratulationsPage();
+                    console.log("Game won");
+                },1000);
+            }
         }
     });
 
     // Set the click listener for the restart element
-    document.getElementById("restart").addEventListener("click", () => {
-        start();
-    });
+    document.getElementById("restart").addEventListener("click", start);
+
+    // Set the click listener for the play again button
+    document.getElementById("play-again").addEventListener("click", start);
 }
 
 init();
