@@ -51,6 +51,9 @@ function shuffle(array) {
 }
 
 function generateCardHTML() {
+
+    // Build the HTML for the cards in the card deck. Set a data-name which will be used for comparing
+    // cards and data-id which will be used for rejecting the comparison where the user clicks the same card twice
     let index = 0;
     return cards.map((card) => {
         let html = `<li class="card" data-name="${card}" data-id="${index}">
@@ -62,16 +65,22 @@ function generateCardHTML() {
 }
 
 function resetStarHTML() {
+
+    // Build the star HTML to show a list of three stars
     return `<li><i class="fa fa-star"></i></li>
             <li><i class="fa fa-star"></i></li>
             <li><i class="fa fa-star"></i></li>`;
 }
 
 function showCard(card) {
+
+    // Show the card's face by adding the show and open classes
     card.classList.add("show","open");
 }
 
 function lockMatchedCards() {
+
+    // Lock the cards in the open position by adding the match class to the open cards
     if (openCards.length === 2) {
         openCards[0].classList.add("match");
         openCards[1].classList.add("match");
@@ -81,6 +90,8 @@ function lockMatchedCards() {
 }
 
 function resetUnmatchedCards() {
+
+    // Flip cards that are unmatched back to their hidden position by removing open and show classes after 1 second
     if (openCards.length === 2) {
         setTimeout(() => {
             openCards[0].classList.remove("open","show");
@@ -91,17 +102,24 @@ function resetUnmatchedCards() {
 }
 
 function incrementMoveCounter() {
+
+    // Increment the move count and set the visual element
     moveCounter++;
     document.getElementById("moves").innerText = moveCounter;
 }
 
 function updateStarCounter() {
+
+    // Set the starCount depending on moves taken
     switch (true) {
         case (moveCounter < 16) : starCount = 3; break;
         case (moveCounter > 15 && moveCounter < 26) : starCount = 2; break;
         case (moveCounter > 25 && moveCounter < 36) : starCount = 1; break;
         default : starCount = 0;
     }
+
+    // Set the visual element for the number of stars depending on the starCount and the number of
+    // visual star elements left on screen
     let starElement = document.getElementById("stars");
     if (starElement.children.length > 0) {
         switch (true) {
@@ -122,11 +140,11 @@ function updateStarCounter() {
 
 function addCardToOpenList(card) {
 
-    // Ignore the card if it is already in the list of cards. i.e. ignore the card if the user clicks the same one twice
+    // Add the card to the openCards array if the card array is empty or the card is not already in the list
     if (openCards.length !== 1 || openCards[0].dataset.id !== card.dataset.id) {
         openCards.push(card);
 
-        // Do the cards match
+        // If there are two cards in the list, check to make sure that they match
         if (openCards.length === 2) {
             if (openCards[0].dataset.name === openCards[1].dataset.name) {
                 // Yes they do.
@@ -135,48 +153,66 @@ function addCardToOpenList(card) {
                 // No they don't
                 resetUnmatchedCards();
             }
+            // Add 1 to the move counter
             incrementMoveCounter();
+
+            // Potentially update the number of stars depending on moves taken
             updateStarCounter();
         }
     }
 }
 
 function showCongratulationsPage() {
+
+    // Hide the card deck HTML and show the game results HTML
     document.getElementById("deck").style.display = "none";
     document.getElementById("congratulations-page").style.display = "block";
+
+    // Based on the remaining star count, we might want to use 'star' verses 'stars' in the result task... i.e. with 2 stars verses qith 1 star
     const description = starCount !== 1 ? 'stars' : 'star';
+
+    // Set the visual elements result text
     document.getElementById("result").innerHTML = `With ${moveCounter} moves and ${starCount} ${description} in ${timeTaken} seconds<div>Woooooooo!!!</div>`;
 }
 
 function showCardDeckPage() {
+
+    // Hide the game results HTML and show the card deck HTML
     document.getElementById("deck").style.display = "flex";
     document.getElementById("congratulations-page").style.display = "none";
 }
 
 function start() {
 
+    // Hide the game results HTML and show the card deck HTML
     showCardDeckPage();
+
+    // Re-in initialize all the game counters and visual elements
     openCards.length = 0;
     moveCounter = -1;
     timeTaken = 0;
     matchedCardCount = 0;
     starCount = 3;
-    document.getElementById("time-taken").innerText = `Time : ${timeTaken}`;
 
+    document.getElementById("time-taken").innerText = `Time : ${timeTaken}`;
     document.getElementById("stars").innerHTML = resetStarHTML();
 
+    // Stop the timer in case it's running from the previous game
     clearInterval(intervalTimer);
 
+    // Start the game timer, and update the visual element once a second with the game time
     intervalTimer = setInterval(() => {
         timeTaken += 1;
         document.getElementById("time-taken").innerText = `Time : ${timeTaken}`;
     }, 1000);
+
+    // Set the move counter to zero (from -1)
     incrementMoveCounter();
 
-    // Shuffle the card array
+    // Shuffle the card array for the new game
     cards = shuffle(cards);
 
-    // Generate HTML based on the cards array
+    // Generate HTML based on the cards array.
     const generatedHTML = generateCardHTML().join('');
 
     // Append the generated <li> items to the deck
@@ -187,21 +223,33 @@ function start() {
 
 function init() {
 
+    // When the game loads initially, hide the HTML for the winning congartulations page. This will only be displayed when the user finishes the game
     document.getElementById("congratulations-page").style.display = "none";
 
-    // Set the click event listener on the deck
+    // Set the click event listener on the deck. Sewtting this on the deck will improve performance rather than setting a listener for each card
     document.getElementById("deck").addEventListener("click", (e) => {
+
+        // Make sure that the clicked element is a 'card' and the number of cards 'open' in the array is less than two. If the clicked element is
+        // not a card or we have more than two cards open, then ignore the click
         if (e.target.classList.contains("card") && openCards.length < 2) {
-            // Grab the card and flip it
+
+            // Grab the card from the target
             let card = e.target;
+
+            // Flip the card
             showCard(card);
+
+            // Add the card to the list of open cards. The max number of cards in the list will be 2. This function will also identify a successful match,
+            // update the star rating, move counters, and reset non-matched cards.
             addCardToOpenList(card);
+
+            // Check to see if we have eight matches. If we do, the game is won
             if (matchedCardCount === 8) {
-                // Game won
+
+                // The game is won. After 1 second, show the congratulations pop up modal with the game results
+                clearInterval(intervalTimer);
                 setTimeout(() => {
-                    clearInterval(intervalTimer);
                     showCongratulationsPage();
-                    console.log("Game won");
                 },1000);
             }
         }
@@ -214,17 +262,8 @@ function init() {
     document.getElementById("play-again").addEventListener("click", start);
 }
 
+// Initialize the event listeners. These are spliot out from the start / reset functionality as we only ever want to attach these once
 init();
+
+// Reset all variables and counters, etc, and start a new game
 start();
-
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
