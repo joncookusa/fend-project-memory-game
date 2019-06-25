@@ -93,9 +93,14 @@ function resetUnmatchedCards() {
 
     // Flip cards that are unmatched back to their hidden position by removing open and show classes after 1 second
     if (openCards.length === 2) {
+
+        openCards.forEach((card) => {
+            card.classList.add("nomatch");
+        });
+
         setTimeout(() => {
-            openCards[0].classList.remove("open","show");
-            openCards[1].classList.remove("open","show");
+            openCards[0].classList.remove("open","show","nomatch");
+            openCards[1].classList.remove("open","show","nomatch");
             openCards.length = 0;
         },1000);
     }
@@ -146,13 +151,9 @@ function addCardToOpenList(card) {
 
         // If there are two cards in the list, check to make sure that they match
         if (openCards.length === 2) {
-            if (openCards[0].dataset.name === openCards[1].dataset.name) {
-                // Yes they do.
-                lockMatchedCards();
-            } else {
-                // No they don't
-                resetUnmatchedCards();
-            }
+            // If they match call lockMatchedCards else call resetUnmatchedCards()
+            (openCards[0].dataset.name === openCards[1].dataset.name) ? lockMatchedCards() : resetUnmatchedCards();
+
             // Add 1 to the move counter
             incrementMoveCounter();
 
