@@ -115,12 +115,11 @@ function incrementMoveCounter() {
 
 function updateStarCounter() {
 
-    // Set the starCount depending on moves taken
+    // Set the starCount depending on moves taken. Less than 16 moves and you get 3*. Between 16 and 25 you get 2*. Anything above 25 moves and you get 1*.
     switch (true) {
         case (moveCounter < 16) : starCount = 3; break;
         case (moveCounter > 15 && moveCounter < 26) : starCount = 2; break;
-        case (moveCounter > 25 && moveCounter < 36) : starCount = 1; break;
-        default : starCount = 0;
+        default : starCount = 1;
     }
 
     // Set the visual element for the number of stars depending on the starCount and the number of
@@ -132,9 +131,6 @@ function updateStarCounter() {
                 starElement.children[0].remove();
                 break;
             case (starCount === 1 && starElement.children.length === 2) :
-                starElement.children[0].remove();
-                break;
-            case (starCount === 0 && starElement.children.length === 1) :
                 starElement.children[0].remove();
                 break;
             default :
