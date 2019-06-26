@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c1930c9c-2093-463a-8321-70b78d1d39ff" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/app.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -28,8 +27,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="20" lean-forward="true" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
+            <state relative-caret-position="345">
+              <caret line="23" column="18" lean-forward="true" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -177,7 +176,7 @@
       <workItem from="1561383364142" duration="13354000" />
       <workItem from="1561470298193" duration="11406000" />
       <workItem from="1561556510062" duration="99000" />
-      <workItem from="1561578366354" duration="1578000" />
+      <workItem from="1561578366354" duration="1830000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1561384675372</created>
@@ -228,15 +227,21 @@
       <option name="project" value="LOCAL" />
       <updated>1561579994570</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Refactor the cards array to use spread operator">
+      <created>1561580465355</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1561580465355</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43780000" />
+    <option name="totallyTimeSpent" value="44032000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12006319" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -270,7 +275,8 @@
     <MESSAGE value="Add card flip animation and fix up css and js to adhere to style guidelines" />
     <MESSAGE value="Change so that the minimum star rating a player can obtain is 1 star verses 0 stars as it was set to previously" />
     <MESSAGE value="Fix issue where a matched card will accept a click event that flips the card" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix issue where a matched card will accept a click event that flips the card" />
+    <MESSAGE value="Refactor the cards array to use spread operator" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor the cards array to use spread operator" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/img/geometry2.png">
@@ -306,8 +312,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="20" lean-forward="true" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
+        <state relative-caret-position="345">
+          <caret line="23" column="18" lean-forward="true" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
