@@ -39,6 +39,7 @@ h1 {
 
 .deck {
     width: 660px;
+    max-width: 100%;
     min-height: 680px;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     padding: 32px;
@@ -80,6 +81,7 @@ h1 {
     cursor: default;
     background: #02ccba;
     font-size: 55px;
+    pointer-events: none;
 }
 
 .deck .card.nomatch {
@@ -133,12 +135,12 @@ h1 {
     text-align: center;
 }
 
-#result {
+.result {
     color: gray;
     margin-bottom: 10px;
 }
 
-#congratulations-page button {
+.congratulations-page button {
     background: #02ccba;
     min-height: 32px;
     font-size: 1.5em;
