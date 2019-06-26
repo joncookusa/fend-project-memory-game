@@ -228,7 +228,7 @@ function init() {
 
         // Make sure that the clicked element is a 'card' and the number of cards 'open' in the array is less than two. If the clicked element is
         // not a card or we have more than two cards open, then ignore the click
-        if (e.target.classList.contains("card") && openCards.length < 2) {
+        if (e.target.classList.contains("card") && !e.target.classList.contains("match") && openCards.length < 2) {
 
             // Grab the card from the target
             let card = e.target;
