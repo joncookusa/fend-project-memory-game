@@ -25,11 +25,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="557">
-              <caret line="129" column="40" selection-start-line="129" selection-start-column="40" selection-end-line="129" selection-end-column="40" />
+            <state relative-caret-position="270">
+              <caret line="18" column="20" lean-forward="true" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -49,7 +49,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="645">
@@ -177,7 +177,7 @@
       <workItem from="1561383364142" duration="13354000" />
       <workItem from="1561470298193" duration="11406000" />
       <workItem from="1561556510062" duration="99000" />
-      <workItem from="1561578366354" duration="281000" />
+      <workItem from="1561578366354" duration="1578000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1561384675372</created>
@@ -214,14 +214,29 @@
       <option name="project" value="LOCAL" />
       <updated>1561486418779</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Change so that the minimum star rating a player can obtain is 1 star verses 0 stars as it was set to previously">
+      <created>1561578866306</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1561578866306</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Fix issue where a matched card will accept a click event that flips the card">
+      <created>1561579994570</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1561579994570</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42483000" />
+    <option name="totallyTimeSpent" value="43780000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12006319" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -253,7 +268,9 @@
     <MESSAGE value="Update readme.md and remove contributing.md" />
     <MESSAGE value="Add code comments" />
     <MESSAGE value="Add card flip animation and fix up css and js to adhere to style guidelines" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add card flip animation and fix up css and js to adhere to style guidelines" />
+    <MESSAGE value="Change so that the minimum star rating a player can obtain is 1 star verses 0 stars as it was set to previously" />
+    <MESSAGE value="Fix issue where a matched card will accept a click event that flips the card" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix issue where a matched card will accept a click event that flips the card" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/img/geometry2.png">
@@ -280,20 +297,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="557">
-          <caret line="129" column="40" selection-start-line="129" selection-start-column="40" selection-end-line="129" selection-end-column="40" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="645">
           <caret line="43" column="55" lean-forward="true" selection-start-line="43" selection-start-column="55" selection-end-line="43" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="20" lean-forward="true" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
