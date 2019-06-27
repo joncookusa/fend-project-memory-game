@@ -271,7 +271,6 @@ const MemoryGame = (() => {
     };
 })();
 
-// Initialize the event listeners. These are spliot out from the start / reset functionality as we only ever want to attach these once
 MemoryGame.init();
 
 
